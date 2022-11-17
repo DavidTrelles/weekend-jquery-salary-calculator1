@@ -33,8 +33,19 @@ function newEmployee() {
       employeeArray.push(newEmployee);
     console.log(employeeArray);
   }
+   monthlyCost()
   renderFunc();
 }
+
+let dollars = Intl.NumberFormat('en-US')
+function monthlyCost(){
+  let total = 0
+  for (let employee of employeeArray){
+    total += (employee.salary/12);
+  } 
+  total = +total
+    $('#costOut').empty().append("$", dollars.format(total))
+} 
 
 function renderFunc() {
   let el = $("#employeesOut");
@@ -42,7 +53,7 @@ function renderFunc() {
 
   for (let employee of employeeArray) {
     let newList = `
-  <li data-id=${employee.id}>${employee.firstName} ${employee.lastName} ${employee.id} ${employee.title} ${employee.salary} <button id="removeEmployee">Remove</button></li>
+  <li data-id=${employee.id}>${employee.firstName} ${employee.lastName} ${employee.id} ${employee.title} $${dollars.format(employee.salary)} <button id="removeEmployee">Remove</button></li>
   `;
     el.append(newList);
   }
