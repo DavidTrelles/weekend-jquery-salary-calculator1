@@ -4,7 +4,7 @@ let employeeArray = [];
 
 function onReady() {
   $("#submit").on("click", newEmployee);
-  $("#employeesOut").on("click", "#removeEmployee", remove);
+  $("#outputs").on("click", "#removeEmployee", remove);
 }
 
 function newEmployee() {
@@ -48,22 +48,33 @@ function monthlyCost(){
 } 
 
 function renderFunc() {
-  let el = $("#employeesOut");
-  el.empty();
+  let el = $("#newRow");
+   el.empty();
 
   for (let employee of employeeArray) {
-    let newList = `
-  <li data-id=${employee.id}>${employee.firstName} ${employee.lastName} ${employee.id} ${employee.title} $${dollars.format(employee.salary)} <button id="removeEmployee">Remove</button></li>
-  `;
-    el.append(newList);
+  //   let newList = `
+  // <li data-id=${employee.id}>${employee.firstName} ${employee.lastName} ${employee.id} ${employee.title} $${dollars.format(employee.salary)} <button id="removeEmployee">Remove</button></li>
+  // `;
+  let newRow = `
+  <tr data-id=${employee.id}>
+            <td>${employee.firstName}</td>
+            <td>${employee.lastName}</td>
+            <td>${employee.id}</td>
+            <td>${employee.title}</td>
+            <td>$${dollars.format(employee.salary)}</td>
+            <td><button id="removeEmployee">Remove</button></td>
+          </tr>
+  `
+    el.append(newRow);
   }
 }
 
 function remove() {
   for (let i = 0; i < employeeArray.length; i++) {
-    if (employeeArray[i].id == $(this).parent().data("id"))
+    if (employeeArray[i].id == $(this).parent().parent().data("id"))
       employeeArray.splice(i, 1);
-  //  console.log($(this).parent().data('id'));
+   console.log($(this).parent().parent().data('id'));
   }
+   monthlyCost();
   renderFunc();
 }
