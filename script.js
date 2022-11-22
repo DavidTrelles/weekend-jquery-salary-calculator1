@@ -15,7 +15,7 @@ function newEmployee() {
     $("#titleIn").val() === "" ||
     $("#salaryIn").val() === ""
   ) {
-    console.log("Error");
+    alert("Please fill in all fields");
   } else {
     let newEmployee = {
       firstName: $("#firstNameIn").val(),
@@ -50,7 +50,6 @@ function monthlyCost() {
     ? $("#costOut").css("background-color", "red")
     : $("#costOut").css("background-color", "white");
 }
-
 
 function renderFunc() {
   let el = $("#newRow");
